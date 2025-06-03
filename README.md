@@ -1,18 +1,20 @@
-## Getting Started
+---
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## ✅ Funcionalidades atuais
 
-## Folder Structure
+- **Cadastrar piloto**
+  - O usuário digita o nome e a equipe.
+  - O piloto é salvo no arquivo `piloto.txt`.
+  - O novo piloto também é adicionado a uma lista em memória.
 
-The workspace contains two folders by default, where:
+- **Listar pilotos**
+  - O sistema lê o arquivo `piloto.txt` e imprime os pilotos cadastrados no formato:
+    ```
+    - Nome (Equipe: NomeDaEquipe)
+    ```
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+- **Popular a lista com base no arquivo**
+  - Lê o conteúdo do arquivo `piloto.txt`.
+  - Cria objetos `Piloto` e os adiciona à lista recebida como parâmetro.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+---
