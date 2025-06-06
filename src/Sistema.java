@@ -29,6 +29,7 @@ public class Sistema {
                     break;
 
                 case 2:
+                    PilotoController.editarPiloto(scanner, pilotos);
                     break;
                 
                 case 3:

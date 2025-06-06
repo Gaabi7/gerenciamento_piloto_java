@@ -95,18 +95,16 @@ public class PilotoController {
     public static void editarPiloto(Scanner scanner, ArrayList<Piloto> lista) {
         if (lista.isEmpty()) {
             System.out.println("Nenhum piloto cadastrado para editar.");
-            return;
+        } 
+
+        else {
+            System.out.println("Escolha o piloto para editar: ");
+            for (int i = 0; i < lista.size(); i++) {
+                Piloto p = lista.get(i);
+                System.out.println((i + 1) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
+            }
+            
+
         }
-
-        System.out.println("Escolha o piloto para editar: ");
-        for (int i = 0; i < lista.size(); i++) {
-            Piloto p = lista.get(i);
-            System.out.println((i + i) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
-
-        }
-
     }
-
 }
-
-
