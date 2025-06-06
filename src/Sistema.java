@@ -1,12 +1,6 @@
-//Fazendo a importação de tudo que será utilizado
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-
 
 public class Sistema {
     public static void main(String[] args) {
@@ -32,11 +26,14 @@ public class Sistema {
             switch (opcao) {
                 case 1:
                     PilotoController.cadastrarPiloto(scanner, pilotos);
+                    break;
 
                 case 2:
-
+                    break;
+                
                 case 3:
-                    PilotoController.listarPilotos(pilotos);
+                    PilotoController.listarPilotos(scanner, pilotos);
+                    break;
 
                     
 

@@ -9,6 +9,8 @@ import java.io.FileReader;
 
 public class PilotoController {
     //cria um metodo para cadastar os pilotos
+    //a lista é criada dentro de 'Sistema.java' e salva os dados do piloto
+    //aqui a função recebe como parametro um scanner, e um Array chamado lista
     public static void cadastrarPiloto(Scanner scanner, ArrayList<Piloto> lista) {
         System.out.printf("Digite o nome do piloto: ");
         String nome = scanner.nextLine();
@@ -36,19 +38,28 @@ public class PilotoController {
     }  
 
     //Metodo para listar
-    public static void listarPilotos(ArrayList<Piloto> lista ) {
+    public static void listarPilotos(Scanner scanner, ArrayList<Piloto> lista ) {
         System.out.println("Lista de pilotos cadastrados");
         try {
             BufferedReader leitor = new BufferedReader(new FileReader("piloto.txt"));
+            //pega o conteudo do arquivo e coloca na variavel linha
             String linha;
 
+            //enquanto a linha tiver algum conteudo escrito
+            //cria um vetor dados que recebe o conteudo da linha e divide ele onde encontra o ';'
+            //Cria uma variavel nome e equipe, separa os dados do vetor pelo seu indice
+            int cont =1;
             while ((linha = leitor.readLine()) != null) {
                 String[] dados = linha.split(";");
                 String nome = dados[0];
                 String equipe = dados[1];
-                System.out.println("- " + nome + " (Equipe: " + equipe + ")");
+                System.out.println(cont + "- " + nome + " (Equipe: " + equipe + ")");
+                cont ++ ;
+
             }
 
+            System.out.printf("Digite qualquer tecla para voltar...");
+            scanner.nextLine();
             leitor.close();
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo.");
