@@ -1,6 +1,6 @@
 ---
 
-## ✅ Funcionalidades atuais
+## Funcionalidades atuais ✅
 
 - **Cadastrar piloto**
   - O usuário digita o nome e a equipe.
