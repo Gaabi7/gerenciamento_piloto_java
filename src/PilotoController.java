@@ -89,7 +89,24 @@ public class PilotoController {
         System.out.println("Erro ao ler o arquivo.");
         e.printStackTrace();
         }
-    }   
+    }  
+    
+    //Escolhendo o piloto
+    public static void editarPiloto(Scanner scanner, ArrayList<Piloto> lista) {
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum piloto cadastrado para editar.");
+            return;
+        }
+
+        System.out.println("Escolha o piloto para editar: ");
+        for (int i = 0; i < lista.size(); i++) {
+            Piloto p = lista.get(i);
+            System.out.println((i + i) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
+
+        }
+
+    }
+
 }
 
 
