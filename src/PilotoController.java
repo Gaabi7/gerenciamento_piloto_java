@@ -95,46 +95,20 @@ public class PilotoController {
     public static void editarPiloto(Scanner scanner, ArrayList<Piloto> lista) {
         if (lista.isEmpty()) {
             System.out.println("Nenhum piloto cadastrado para editar.");
-            return;
-        }
-
-        System.out.println("Escolha o piloto para editar: ");
-        for (int i = 0; i < lista.size(); i++) {
-            Piloto p = lista.get(i);
-            System.out.println((i + i) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
-
         } 
-            
-            }
-            // Excluir o piloto
-        public static void excluirPiloto(Scanner scanner, ArrayList<Piloto> lista) {
-            if (lista.isEmpty()) {
-                System.out.println("Nenhum piloto cadastrado para excluir.");
-        
 
-            System.out.println("Escolha o piloto para excluir: ");
+        else {
+            System.out.println("Escolha o piloto para editar: ");
             for (int i = 0; i < lista.size(); i++) {
                 Piloto p = lista.get(i);
                 System.out.println((i + 1) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
             }
-
-            int escolha = scanner.nextInt();
-            scanner.nextLine();
-
-            if (escolha < 1 || escolha > lista.size()) {
-                System.out.println("Opção inválida.");
-                return;
-            }
-
-            Piloto pilotoRemovido = lista.remove(escolha - 1);
-            System.out.println("Piloto " + pilotoRemovido.getNome() + " excluído com sucesso!");
-
             
-            }
+
         }
 
     }
 
-
+}
 
 
