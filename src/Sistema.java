@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,6 +5,7 @@ public class Sistema {
     public static void main(String[] args) {
         //Criando a lista onde será armazenado os pilotos
         //E logo em seguida populando ela
+        PilotoController.limparTela();
         ArrayList<Piloto> pilotos = new ArrayList<>();
         PilotoController.popularLista(pilotos);
         Scanner scanner = new Scanner(System.in);
@@ -18,6 +18,7 @@ public class Sistema {
             System.out.println("2 - Editar Piloto");
             System.out.println("3 - Listar Pilotos");
             System.out.println("4 - Excluir Piloto");
+            System.out.println("5 - Buscar Piloto por ID");
             System.out.println("0 - Sair");
             System.out.printf("- ");
             String op = scanner.nextLine();
@@ -36,15 +37,20 @@ public class Sistema {
                     PilotoController.listarPilotos(scanner, pilotos);
                     break;
 
-                 case 4:
+                case 4:
                     PilotoController.excluirPiloto(scanner, pilotos);
                     break;   
 
+                case 5:
+                    PilotoController.buscarPilotoPorID(scanner, pilotos);
+                    break;
+
+                case 0:
+                    run = false;
+                    break;
             }
 
-
         }
-
 
     }
     
