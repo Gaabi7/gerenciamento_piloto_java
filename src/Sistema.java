@@ -37,7 +37,7 @@ public class Sistema {
                     break;
 
                  case 4:
-                    PilotoController.excluirPiloto(scanner, pilotos);
+                   
                     break;   
 
             }
