@@ -113,6 +113,7 @@ public class PilotoController {
             public static void excluirPiloto(Scanner scanner, ArrayList<Piloto> lista) {
             if (lista.isEmpty()) {
                 System.out.println("Nenhum piloto cadastrado para excluir.");
+            return;} 
         
 
             System.out.println("Escolha o piloto para excluir: ");
@@ -127,13 +128,29 @@ public class PilotoController {
             if (escolha < 1 || escolha > lista.size()) {
                 System.out.println("Opção inválida.");
                 return;
-            }
-
+            }else {
             Piloto pilotoRemovido = lista.remove(escolha - 1);
+                 try {
+            FileWriter escritor = new FileWriter("piloto.txt");
+            for (Piloto c : lista) {
+                escritor.write(c.toString() + "\n");
+            }
+            System.out.println("-------------------");
             System.out.println("Piloto " + pilotoRemovido.getNome() + " excluído com sucesso!");
 
+            System.out.println("-------------------");
+            escritor.close();
+        } catch (IOException e){
+            System.out.println("Erro ao gravar no arquivo.");
+            e.printStackTrace();
+
+        }  
+            }
+
+          
+            
         }
     }
-}
+
 
 
