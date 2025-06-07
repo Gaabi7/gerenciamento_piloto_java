@@ -13,10 +13,19 @@ public class PilotoController {
     //aqui a função recebe como parametro um scanner, e um Array chamado lista
     public static void cadastrarPiloto(Scanner scanner, ArrayList<Piloto> lista) {
         System.out.printf("Digite o nome do piloto: ");
-        String nome = scanner.nextLine();
-
+        String nome = scanner.nextLine().trim();
+        if (nome.isEmpty()) {
+            limparTela();
+            System.out.println("Nome não pode ser vazio!");
+            return;
+        }
         System.out.printf("Digite a equipe: ");
-        String equipe = scanner.nextLine();
+        String equipe = scanner.nextLine().trim();
+        if (equipe.isEmpty()) {
+            limparTela();
+            System.out.println("Equipe não pode ser vazia!");
+            return;
+        }
 
         Piloto novoPiloto = new Piloto(nome, equipe);
         lista.add(novoPiloto);
@@ -26,11 +35,13 @@ public class PilotoController {
             for (Piloto c : lista) {
                 escritor.write(c.toString() + "\n");
             }
+            limparTela();
             System.out.println("-------------------");
             System.out.println("Piloto adicionado!");
             System.out.println("-------------------");
             escritor.close();
         } catch (IOException e){
+            limparTela();
             System.out.println("Erro ao gravar no arquivo.");
             e.printStackTrace();
 
@@ -39,6 +50,7 @@ public class PilotoController {
 
     //Metodo para listar
     public static void listarPilotos(Scanner scanner, ArrayList<Piloto> lista ) {
+        limparTela();
         System.out.println("Lista de pilotos cadastrados");
         try {
             BufferedReader leitor = new BufferedReader(new FileReader("piloto.txt"));
@@ -58,9 +70,10 @@ public class PilotoController {
 
             }
 
-            System.out.printf("Digite qualquer tecla para voltar...");
+            System.out.printf("Aperte a tecla ENTER para voltar...");
             scanner.nextLine();
             leitor.close();
+            limparTela();
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo.");
             e.printStackTrace();
@@ -81,7 +94,6 @@ public class PilotoController {
             Piloto c = new Piloto(nome, equipe);
             lista.add(c);
             
-            
         }
 
         leitor.close();
@@ -94,63 +106,139 @@ public class PilotoController {
     //Escolhendo o piloto
     public static void editarPiloto(Scanner scanner, ArrayList<Piloto> lista) {
         if (lista.isEmpty()) {
+            limparTela();
             System.out.println("Nenhum piloto cadastrado para editar.");
-        } 
+            return;
 
-        else {
+        } else {
+
+            limparTela();
             System.out.println("Escolha o piloto para editar: ");
+
             for (int i = 0; i < lista.size(); i++) {
                 Piloto p = lista.get(i);
                 System.out.println((i + 1) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
             }
             
-
-        }
-
-    }
-
-            // Excluir o piloto
-            public static void excluirPiloto(Scanner scanner, ArrayList<Piloto> lista) {
-            if (lista.isEmpty()) {
-                System.out.println("Nenhum piloto cadastrado para excluir.");
-            return;} 
-        
-
-            System.out.println("Escolha o piloto para excluir: ");
-            for (int i = 0; i < lista.size(); i++) {
-                Piloto p = lista.get(i);
-                System.out.println((i + 1) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
-            }
-
             int escolha = scanner.nextInt();
             scanner.nextLine();
-
             if (escolha < 1 || escolha > lista.size()) {
-                System.out.println("Opção inválida.");
+                limparTela();
+                System.out.println("Escolha inválida!");
                 return;
-            }else {
-            Piloto pilotoRemovido = lista.remove(escolha - 1);
-                 try {
-            FileWriter escritor = new FileWriter("piloto.txt");
+
+            } 
+
+            Piloto pilotoSelecionado = lista.get(escolha - 1);
+
+            System.out.printf("Novo nome(Deixa em branco se não quiser alterar): " );
+            String novoNome = scanner.nextLine();
+            
+            if (!novoNome.isEmpty() ) {
+                pilotoSelecionado.setNome(novoNome);
+            }
+
+            System.out.printf("Nova Equipe(Deixe em branco se não quiser alterar): ");
+            String novaEquipe = scanner.nextLine();
+
+            if (!novaEquipe.isEmpty()) {
+                pilotoSelecionado.setEquipe(novaEquipe);
+            }
+
+            try {
+                FileWriter escritor = new FileWriter("piloto.txt");
             for (Piloto c : lista) {
                 escritor.write(c.toString() + "\n");
             }
+            limparTela();
             System.out.println("-------------------");
-            System.out.println("Piloto " + pilotoRemovido.getNome() + " excluído com sucesso!");
-
+            System.out.println("Piloto Editado!");
             System.out.println("-------------------");
             escritor.close();
-        } catch (IOException e){
-            System.out.println("Erro ao gravar no arquivo.");
-            e.printStackTrace();
+            } catch (IOException e){
+                limparTela();
+                System.out.println("Erro ao gravar no arquivo.");
+                e.printStackTrace();
 
-        }  
-            }
-
-          
-            
+            }  
         }
     }
 
+            // Excluir o piloto
+    public static void excluirPiloto(Scanner scanner, ArrayList<Piloto> lista) {
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum piloto cadastrado para excluir.");
+            return;
+        } 
+        
 
+        System.out.println("Escolha o piloto para excluir: ");
+        for (int i = 0; i < lista.size(); i++) {
+            Piloto p = lista.get(i);
+            System.out.println((i + 1) + " - " + p.getNome() + " (Equipe: " + p.getEquipe() + ")" );
+        }
 
+        int escolha = scanner.nextInt();
+        scanner.nextLine();
+
+        if (escolha < 1 || escolha > lista.size()) {
+            System.out.println("Opção inválida.");
+            return;
+        }else {
+            Piloto pilotoRemovido = lista.remove(escolha - 1);
+            try {
+                FileWriter escritor = new FileWriter("piloto.txt");
+                for (Piloto c : lista) {
+                    escritor.write(c.toString() + "\n");
+                }
+                System.out.println("-------------------");
+                System.out.println("Piloto " + pilotoRemovido.getNome() + " excluído com sucesso!");
+                System.out.println("-------------------");
+                escritor.close();
+
+            } catch (IOException e){
+                System.out.println("Erro ao gravar no arquivo.");
+                e.printStackTrace();
+            }  
+        }     
+    }
+    
+    public static void buscarPilotoPorID(Scanner scanner, ArrayList<Piloto> lista) {
+        if (lista.isEmpty()) {
+            limparTela();
+            System.out.println("Nenhum piloto cadastrado.");
+            return;
+        }
+        limparTela();
+        System.out.printf("Digite o número do piloto (ID) ou '0' para voltar: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        if (id == 0) {
+            limparTela();
+            return;
+
+        } else if (id < 1 || id > lista.size()) {
+            limparTela();
+            System.out.println("ID inválido!");
+            return;
+        }
+        
+        Piloto p = lista.get(id - 1);
+        System.out.println("Nome: " + p.getNome());
+        System.out.println("Equipe: " + p.getEquipe());
+    }
+    
+    public static void limparTela() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+        System.out.println("Não foi possível limpar a tela.");
+        
+        }
+    }
+}
