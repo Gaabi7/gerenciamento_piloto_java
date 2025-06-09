@@ -227,7 +227,8 @@ public class PilotoController {
         System.out.println("Nome: " + p.getNome());
         System.out.println("Equipe: " + p.getEquipe());
     }
-    
+
+    //Limpador de tela
     public static void limparTela() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
